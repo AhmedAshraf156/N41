@@ -1,2 +1,2 @@
-printf("Hello");
-printf("Hello");
+printf("He9o");
+printf("H96");

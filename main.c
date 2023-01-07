@@ -1,7 +1,7 @@
 #include<stdio.h>
 int main(){
 
-printf("me");
-printf("you");
+printf("25");
+printf("8");
 
 }
