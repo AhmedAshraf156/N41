@@ -1,7 +1,13 @@
-#include<stdio.h>
-int main(){
-
-printf("25");
-printf("8");
-
+#include <stdio.h>
+#include <stdlib.h>
+#include "STD.h"
+#include "SDB.h"
+int main()
+{
+    printf("--------------------Welcome--------------------\n");
+    Create_Database();
+    printf("--------------------Welcome--------------------\n");
+    printf(" \n");
+    SDB_APP ();
+    return 0;
 }
