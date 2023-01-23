@@ -1,8 +1,7 @@
+#ifndef SDB_H_INCLUDED
+#define SDB_H_INCLUDED
 #include "STD.h"
-typedef enum {
-false,
-true
-}bool;
+
 
 typedef struct SimpleDb
 {
@@ -23,7 +22,7 @@ void Enter_Data(student* in);
 void Create_Database();
 
 uint8 SDB_GetUsedSize();
-void SDB_DeletEntry (/*uint32 id*/);
+void SDB_DeletEntry (uint32 id);
 bool SDB_IsFull ();
 bool SDB_AddEntry();
 bool SDB_ReadEntry (uint32 id);
@@ -31,3 +30,4 @@ void SDB_GetList (uint8 * count, uint32 * list);
 bool SDB_IsIdExist (uint32 id);
 student* list_1;
 
+#endif

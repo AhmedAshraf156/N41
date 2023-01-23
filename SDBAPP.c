@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "STD.h"
 #include "SDB.h"
 
 
@@ -24,7 +23,7 @@ scanf("%d",&in->Course3_grade);
 printf(" \n");
 }
 
-void Create_Database(){
+void Create_Database(){  //first 4 records
 //1st Node
 int iter;
 list_1=NULL;
@@ -35,8 +34,8 @@ Enter_Data(temp);
 
 temp->link=list_1;
     list_1=temp;
-//Other Three Nodes
 
+//Other Three Nodes
 for(iter=0;iter<3;iter++){
 student*temp1 = (student*)malloc(sizeof(student));
 Enter_Data(temp1);
@@ -47,7 +46,8 @@ student* ptr2=list_1;
     ptr2->link=temp1;
     temp1->link=NULL;
 }
-//Display Nodes
+
+//Display Nodes for testing database
     student*ptr1 = list_1;
 while(ptr1!=NULL){
         printf("%d ",ptr1->Student_ID);
@@ -57,7 +57,7 @@ while(ptr1!=NULL){
 }
 
 
-void SDB_APP (){
+void SDB_APP (){//main menu display
 uint8 user_choise;
 
 printf("To add entry, enter 1\n");
@@ -74,36 +74,64 @@ SDB_action(user_choise);
 }
 
 void SDB_action (uint8 choice){
+    uint32 deleteid;
     uint32 IfIdExist;
+    uint32 readid;
+    Int8 condition;
+    Int8 foundcondition;
+    Int8 readcondition;
 while(choice!=0){
 switch(choice){
-case(1):SDB_AddEntry;break;
+case(1)://-------------------done
+ condition=SDB_AddEntry();          //call add function
+if(condition==1)                    //if function added
+    printf("Done !\n");
+else if(condition==0){               //if function not added
+    printf("Error !\n");
+    }
+    break;
 
 case(2):printf(" %d ",SDB_GetUsedSize());break;//------done
 
-case(3):printf("%d",SDB_ReadEntry);break;
-
-case(4):printf("%d",SDB_GetList);break;
-case(5)://--------------------------------------------not yet
+case(3)://---------------------------------------------done
     printf("\n Enter The Id Needed To Be Scanned :");
-    scanf("%d",&IfIdExist);
-    if(SDB_IsIdExist(IfIdExist)==1)
-    printf("Found\n");
-    else if(SDB_IsIdExist(IfIdExist)==0)
+    scanf("%d",&readid);                        //enter id needed to be scanned
+    readcondition=SDB_ReadEntry(readid);        //call function of searching
+    if(readcondition==1)                        //if function return 1
+    printf("\n Found \n");
+    else if(readcondition==0)                   // else if function return
         printf("Not Found\n");
     break;
 
-case(6):SDB_DeletEntry();break;
+case(4):printf("%d",SDB_GetList);break;
+
+
+case(5)://--------------------------------------------done
+    printf("\n Enter The Id Needed To Be Scanned :");
+    scanf("%d",&IfIdExist);            //enter id needed to be scanned
+    foundcondition=SDB_IsIdExist(IfIdExist);
+    if(foundcondition==1)    //condition of return value of function
+        printf("Found\n");
+    else if(foundcondition==0)
+        printf("Not Found\n");
+    break;
+
+case(6)://-------------------------------------------------done
+    printf("\n Enter The Id Needed To Be Deleted :");
+    scanf("%d",&deleteid);                   //enter id needed to be deleted
+    SDB_DeletEntry(deleteid);break;          //perform function
 
 case(7)://---------------------------------------------done
-    if(SDB_IsFull()==1)
+    if(SDB_IsFull()==1)                      //condition of return value
         printf("DataBase is Full\n");
-    else if(SDB_IsFull()==0)
-        printf("There Is a place\n");break;
+    else if(SDB_IsFull()==0){
+        printf("There Is a place\n");
+        }
+        break;
 
-default:printf("Wrong Entry ! ");
+default:printf("Wrong Entry ! ");            //if user input not on system
 }
 printf(" \n");
-SDB_APP();
+SDB_APP();                                   // loop the main menu again
 }
 }

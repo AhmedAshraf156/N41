@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "STD.h"
+//#include "STD.h"
 #include "SDB.h"
 int main()
 {
@@ -8,6 +8,6 @@ int main()
     Create_Database();
     printf("--------------------Welcome--------------------\n");
     printf(" \n");
-    SDB_APP ();
+    SDB_APP (); //start
     return 0;
 }
