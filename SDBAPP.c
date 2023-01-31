@@ -3,7 +3,7 @@
 #include "SDB.h"
 
 
-void Enter_Data(student* in){
+void Enter_Data(student* in){ //Enter Student Data By user
 printf("Enter Student Id : ");
 scanf("%d",&in->Student_ID);
 printf("Enter Student Year : ");
@@ -23,7 +23,7 @@ scanf("%d",&in->Course3_grade);
 printf(" \n");
 }
 
-void Create_Database(){  //first 4 records
+void Create_Database(){  //first default 4 records
 //1st Node
 int iter;
 list_1=NULL;
@@ -60,26 +60,29 @@ while(ptr1!=NULL){
 void SDB_APP (){//main menu display
 uint8 user_choise;
 
-printf("To add entry, enter 1\n");
-printf("To get used size in database, enter 2\n");
-printf("To read student data, enter 3\n");
-printf("To get the list of all student IDs, enter 4\n");
-printf("To check is ID is existed, enter 5 \n");
-printf("To delete student data, enter 6\n");
-printf("To check is database is full, enter 7\n");
-printf("To exit enter 0\n");
+printf("(1) - To add entry, enter\n");
+printf("(2) - To get used size in database, enter \n");
+printf("(3) - To read student data, enter \n");
+printf("(4) - To get the list of all student IDs, enter \n");
+printf("(5) - To check is ID is existed, enter \n");
+printf("(6) - To delete student data, enter \n");
+printf("(7) - To check is database is full, enter \n");
+printf("(0) - To exit enter\n");
 scanf("%d",&user_choise);
 printf("\n");
 SDB_action(user_choise);
 }
 
-void SDB_action (uint8 choice){
+void SDB_action (uint8 choice){ //chose function from menu to be applied
     uint32 deleteid;
     uint32 IfIdExist;
     uint32 readid;
     Int8 condition;
     Int8 foundcondition;
     Int8 readcondition;
+    uint8 countpointer;
+    uint32* listpointer[10];
+    uint8 i;
 while(choice!=0){
 switch(choice){
 case(1)://-------------------done
@@ -103,7 +106,13 @@ case(3)://---------------------------------------------done
         printf("Not Found\n");
     break;
 
-case(4):printf("%d",SDB_GetList);break;
+case(4):
+    SDB_GetList(&countpointer,&listpointer);
+    printf("\n %d \n",countpointer);
+for(i=0;i<countpointer;i++){
+    printf("%d ",*(listpointer+i));        //---------------could not display array!!!!
+}
+    break;
 
 
 case(5)://--------------------------------------------done

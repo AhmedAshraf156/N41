@@ -3,7 +3,6 @@
 //#include "STD.h"
 #include "SDB.h"
 extern student* list_1;
-
 bool SDB_IsFull (){ //determine if database is full
 
 int Record=0;   //variable to count no. of records
@@ -89,10 +88,15 @@ return false; //if id not found
 }
 
 
-
-void SDB_GetList (uint8 * count, uint32 * list){
-
-
+void SDB_GetList (uint8* count, uint32* list[10]){  //get no of id and list them
+    uint8 counter=0;                       //count no. of ID'S
+    student*ptr = list_1;
+while(ptr != NULL){
+    list[counter]=ptr->Student_ID;
+    ptr=ptr->link;                        //go to next record
+    counter++;
+}
+*count =counter;                          //return number of ID'S
 }
 
 bool SDB_IsIdExist (uint32 id){  //check if id user added is found or not
